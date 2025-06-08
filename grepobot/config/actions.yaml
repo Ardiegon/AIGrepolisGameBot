@@ -1,0 +1,80 @@
+LogIn:
+  metadata:
+    description: Log in to the Grepobot service.
+    release_type: event
+    additional_info: LoggedOut
+  actions:
+    - name: world 
+      service: click
+    - name: WAIT
+      service: 3
+
+Reload:
+  metadata:
+    description: Reloads browser (logs you out if mobile app used)
+    release_type: cyclic
+    additional_info: 180
+  actions:
+    - name: reload 
+      service: click
+    - name: WAIT
+      service: 3
+
+SolveCaptcha:
+  metadata:
+    description: Don't be a robot, solve the captcha
+    release_type: always
+    # release_type: event
+    # additional_info: CaptchaOnTheScreen
+  actions:
+    - name: captchaclick 
+      service: click
+    - name: captchaconf 
+      service: click
+    - name: WAIT
+      service: 1
+
+GetResources:
+  metadata:
+    description: Get resources from the cottages.
+    release_type: cyclic
+    additional_info: 300
+  actions:
+    - name: podglad 
+      service: hover
+    - name: wioski
+      service: click
+    - name: wybwszystkie
+      service: click
+    - name: odbierz
+      service: click
+
+FirstLogin:
+  metadata:
+    description: First login to the Grepobot service.
+    release_type: event
+    additional_info: GrepobotStarted
+  actions:
+    - name: LogIn 
+      service: action
+    - name: SolveCaptcha 
+      service: action
+
+TestAction:
+  metadata:
+    description: Test action for Grepobot.
+    release_type: event
+    additional_info: TestActionTriggered
+  actions:
+    - name: testclick 
+      service: click
+    - name: FirstLogin
+      service: action 
+
+CloseAll:
+  metadata:
+    description: Close all windows.
+    release_type: always
+  actions:
+    - name: closeall 
+      service: click

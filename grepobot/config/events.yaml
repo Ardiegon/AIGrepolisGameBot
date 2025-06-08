@@ -1,0 +1,17 @@
+LoggedOut:
+  metadata:
+    description: Check if the user is logged out of grepolis
+    running_condition: cyclic
+    additional_info: 60
+  actions:
+    - name: loginscreen 
+      service: check
+
+CaptchaOnTheScreen:
+  metadata:
+    description: Don't be a robot, solve the captcha
+    running_condition: cyclic
+    additional_info: 60
+  actions:
+    - name: captcha 
+      service: check

@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "grebot"
+version = "0.1.0"
+description = "AIGrepolisBot"
+authors = [
+    { name = "Oskar Bartosz", email = "oskbsz@gmail.com" }
+]
+license = { file = "LICENSE" }
+dependencies = [
+    'matplotlib',
+    'numpy',
+    'mouse',
+    'pyautogui',
+    'pynput',
+    'opencv-python',
+    'easydict',
+    'mss',
+    'PyYAML'
+]
+readme = "README.md"
+requires-python = ">=3.10"
+
+[tool.setuptools.packages.find]
+where = ["."]
