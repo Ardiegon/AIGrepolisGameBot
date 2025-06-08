@@ -33,7 +33,7 @@ Computer Vision based (simulating real user, hence not detectable) assistant for
 
 2. **Start the bot:**
     ```bash
-    python grepobt
+    python grepobot
     ```
 
 3. **Monitor logs:**
