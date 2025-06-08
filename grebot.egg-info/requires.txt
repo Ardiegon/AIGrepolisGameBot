@@ -1,0 +1,10 @@
+matplotlib
+numpy
+mouse
+pyautogui
+pynput
+opencv-python
+easydict
+mss
+PyYAML
+wakepy

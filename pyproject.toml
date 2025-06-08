@@ -19,7 +19,8 @@ dependencies = [
     'opencv-python',
     'easydict',
     'mss',
-    'PyYAML'
+    'PyYAML',
+    'wakepy'
 ]
 readme = "README.md"
 requires-python = ">=3.10"

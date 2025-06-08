@@ -2,6 +2,7 @@ from grepobot.mouse_manager import MouseManager
 from grepobot.screen import Screen
 from grepobot.registry import Registry, build_registry, FlowHelper
 from grepobot.utils.common import format_time
+from wakepy import keep
 
 import time
 
@@ -125,14 +126,15 @@ class Brain:
                     print(f"Action {action_name} reacted to {event_name}.")
                 
     def run(self):
-        self.current_round_time = time.time()
-        while self.round_time < self.end_time:
-            print("NEXT TURN")
-            self.print_game_state_info()
-            self.check_every_event()
-            self.propagate_all_actions()
-            self.reset_all()
-            self.sleep_until_end_of_round()
+        with keep.presenting():
+            while self.round_time < self.end_time:
+                self.current_round_time = time.time()
+                print("NEXT TURN")
+                self.print_game_state_info()
+                self.check_every_event()
+                self.propagate_all_actions()
+                self.reset_all()
+                self.sleep_until_end_of_round()
 
     def click(self, game_object):
         print(f"Clicking on game object: {game_object.name}")
