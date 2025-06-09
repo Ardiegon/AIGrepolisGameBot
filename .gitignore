@@ -1,4 +1,4 @@
 *screenshot.png
 *image.png
-*.egg_info
+*.egg_info/
 __pycache__

@@ -4,7 +4,7 @@
 # GrepoBot configuration file
 
 round_time: 60           # Time in seconds between each round of actions
-rounds: 240              # Total number of rounds to be executed
+rounds: 320              # Total number of rounds to be executed
  
 # What comes after each other is important!
 actions:                 # List of actions to be performed by Grepobot

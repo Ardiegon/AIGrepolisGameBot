@@ -28,7 +28,7 @@ class TemplateMatcher:
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
         return max_loc
     
-    def is_object_on_screen(self, result, threshold=0.4):
+    def is_object_on_screen(self, result, threshold=0.43):
         _, max_val, _, _ = cv2.minMaxLoc(result)
         print("robability of match: ", max_val, ", treshold: ", threshold)
         return max_val >= threshold
