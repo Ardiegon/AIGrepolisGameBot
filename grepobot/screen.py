@@ -1,30 +1,31 @@
 import cv2
+import numpy as np
 from mss import mss
 from grepobot.match import TemplateMatcher
 
 from grepobot.config import SCREENSHOT_PATH
 from platform import system
+from PIL.ImageGrab import grab
 
 
 class Screen:
     def __init__(self):
         self.matcher = TemplateMatcher()
-        self.current_screenshot = None
         self.which_system = system()
-
 
     def scale_cors(self, cors):
         return (int(cors[0] / 1920 * self.sc_shape[1]), int(cors[1] / 1080 * self.sc_shape[0]))
 
     def take_screenshot(self, filename=SCREENSHOT_PATH):
-        with mss() as sct:
-            path = sct.shot(output=filename)
-            screenshot = cv2.imread(path, cv2.IMREAD_COLOR)
-            self.sc_shape = screenshot.shape
-            if self.which_system == "Darwin":
-                self.sc_shape = [self.sc_shape[0]/2, self.sc_shape[1]/2]
-            self.current_screenshot = cv2.resize(screenshot, (1920, 1080)) 
-        return self.current_screenshot
+        pic = grab()
+        screenshot = np.array(pic)[:,:, :3]
+        screenshot = cv2.cvtColor(screenshot, cv2.COLOR_RGB2BGR)
+        self.sc_shape = screenshot.shape
+        if self.which_system == "Darwin":
+            self.sc_shape = [self.sc_shape[0]/2, self.sc_shape[1]/2]
+        screenshot = cv2.resize(screenshot, (1920, 1080))
+        # cv2.imwrite(filename, screenshot)
+        return screenshot
 
     def is_on_screen(self, template_path):
         screenshot = self.take_screenshot()
