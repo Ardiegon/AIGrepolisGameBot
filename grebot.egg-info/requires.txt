@@ -8,3 +8,4 @@ easydict
 mss
 PyYAML
 wakepy
+pillow

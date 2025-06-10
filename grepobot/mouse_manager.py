@@ -37,6 +37,10 @@ class Mouse(ABC):
     def move_to(self, x, y):
         pass
 
+    @abstractmethod
+    def position(self):
+        pass
+
 class WindowsMouse(Mouse):
     def __init__(self) -> None:
         super().__init__()
@@ -63,6 +67,9 @@ class WindowsMouse(Mouse):
     def release(self):
         pyautogui.mouseUp(button='left')
 
+    def position(self):
+        return (0,0) # TO BE DONE
+
 class MacosMouse(Mouse):
     def __init__(self) -> None:
         super().__init__()
@@ -72,6 +79,9 @@ class MacosMouse(Mouse):
 
     def move(self, x, y, absolute=False):
         self.controller.move(x, y)
+
+    def move_to(self, x, y):
+        self.controller.position = (x,y)
     
     def click(self, side):
         if side == "left":
@@ -94,6 +104,9 @@ class MacosMouse(Mouse):
     def release(self):
         self.controller.release(macos_mouse_module.Button.left)
 
+    def position(self):
+        return self.controller.position 
+
 class MouseManager():
     def __init__(self):
         self.platform = which_system
@@ -114,6 +127,9 @@ class MouseManager():
 
     def click(self):
         self.mouse.click("left")
+
+    def position(self):
+        return self.mouse.position()
 
 
 if __name__ == "__main__":

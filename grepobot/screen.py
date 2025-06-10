@@ -3,11 +3,15 @@ from mss import mss
 from grepobot.match import TemplateMatcher
 
 from grepobot.config import SCREENSHOT_PATH
+from platform import system
+
 
 class Screen:
     def __init__(self):
         self.matcher = TemplateMatcher()
         self.current_screenshot = None
+        self.which_system = system()
+
 
     def scale_cors(self, cors):
         return (int(cors[0] / 1920 * self.sc_shape[1]), int(cors[1] / 1080 * self.sc_shape[0]))
@@ -17,6 +21,8 @@ class Screen:
             path = sct.shot(output=filename)
             screenshot = cv2.imread(path, cv2.IMREAD_COLOR)
             self.sc_shape = screenshot.shape
+            if self.which_system == "Darwin":
+                self.sc_shape = [self.sc_shape[0]/2, self.sc_shape[1]/2]
             self.current_screenshot = cv2.resize(screenshot, (1920, 1080)) 
         return self.current_screenshot
 

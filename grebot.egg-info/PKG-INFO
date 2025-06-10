@@ -15,6 +15,7 @@ Requires-Dist: easydict
 Requires-Dist: mss
 Requires-Dist: PyYAML
 Requires-Dist: wakepy
+Requires-Dist: pillow
 
 # AIGrepolisGameBot
 Computer Vision based assistant for doing basic and boring stuff automatically in grepolis. Simulates real user, currently undetectable. For research and educational purposes only. 
