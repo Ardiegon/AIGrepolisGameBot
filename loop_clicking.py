@@ -1,8 +1,17 @@
 import time
+import argparse
 from grepobot.mouse_manager import MouseManager
 from grepobot.game_object import GameObject
 from grepobot.screen import Screen
+from grepobot.utils.common import format_time
 from wakepy import keep
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="Grepobot CLI")
+    parser.add_argument("--version", action="version", version="Grepobot 0.1.0")
+    parser.add_argument("--work-hours", type=float, help="For how many hours the program should work?", default=4.0)
+    
+    return parser.parse_args()
 
 def move_and_click(mouse_manager, cors):
     mouse_manager.move_mouse(cors)
@@ -81,14 +90,16 @@ def single_loop(mouse_manager, screen):
     time.sleep(60*5+5)
 
 if __name__ == "__main__":
+    args = parse_args()
     start = time.time()
-    work_hours = 2.5
+    work_seconds = args.work_hours*60*60
+    print(f"Will work untill {format_time(start + work_seconds)}")
     time.sleep(3)
     mouse_manager = MouseManager()
     screen = Screen()
     break_counter = 0
     with keep.presenting():
-        while work_hours*60*60 > time.time() - start:
+        while work_seconds > time.time() - start:
             try:
                 single_loop(mouse_manager, screen)
                 break_counter=0

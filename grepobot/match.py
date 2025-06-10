@@ -30,7 +30,6 @@ class TemplateMatcher:
     
     def is_object_on_screen(self, result, threshold=0.43):
         _, max_val, _, _ = cv2.minMaxLoc(result)
-        print("robability of match: ", max_val, ", treshold: ", threshold)
         return max_val >= threshold
 
     def get_middle_coordinates(self, screenshot, template):
